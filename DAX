@@ -1,0 +1,24 @@
+1)  Total Revenue = SUM(ebay_transactions[total_revenue])
+
+2) Total Profit = 
+SUMX(
+    ebay_transactions,
+    ebay_transactions[total_revenue] - 
+    (RELATED(ebay_products[cost_price]) * ebay_transactions[quantity])
+)
+
+3) Total Units = SUM(ebay_transactions[quantity])
+
+4) AOV = AVERAGE(ebay_transactions[total_revenue])
+
+5) Loyal Customers =
+CALCULATE(
+    DISTINCTCOUNT(ebay_transactions[customer_id]),
+    FILTER(
+        ebay_transactions,
+        MONTH(ebay_transactions[date]) = 10
+            || MONTH(ebay_transactions[date]) = 12
+    )
+)
+
+6) 
